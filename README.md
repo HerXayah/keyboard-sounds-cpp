@@ -1,6 +1,6 @@
 # ⌨ Keyboard Sounds but better
-- This cpp console application: plays osu keyboard sound effects, when you press keyboard 😳
-[Original](https://github.com/KerimPotter/osu-keyboard-sounds-cpp)
+- This cpp console application: plays keyboard sound effects, when you press keyboard 😳
+- [Original](https://github.com/KerimPotter/osu-keyboard-sounds-cpp)
 
 ### How to use?
 
