@@ -6,6 +6,8 @@ using namespace std;
 
 HHOOK hHook = NULL;
 
+bool show = false;
+
 HSTREAM keyCaps;
 HSTREAM keyConfirm;
 HSTREAM keyDelete;
@@ -44,6 +46,16 @@ LRESULT CALLBACK MyHook(int nCode, WPARAM wParam, LPARAM lParam) {
         case VK_DOWN:
             BASS_ChannelPlay(keyMovement, TRUE);
             break;
+        case VK_INSERT: 
+            show = !show;
+            if (!show)
+            {
+                ShowWindow(GetConsoleWindow(), SW_SHOW);
+
+            }
+            else {
+                ShowWindow(GetConsoleWindow(), SW_HIDE);
+            }
         default:
             switch (rand() % 4)
             {
@@ -66,7 +78,9 @@ LRESULT CALLBACK MyHook(int nCode, WPARAM wParam, LPARAM lParam) {
 
 int main()
 {
+
     hHook = SetWindowsHookEx(WH_KEYBOARD_LL, MyHook, NULL, NULL);
+
     BASS_Init(-1, 44100, 0, 0, NULL);
 
     keyCaps = BASS_StreamCreateFile(FALSE, "./sounds/keyCaps.mp3", 0, 0, 0);
