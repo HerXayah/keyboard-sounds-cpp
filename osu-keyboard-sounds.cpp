@@ -28,25 +28,18 @@ LRESULT CALLBACK MyHook(int nCode, WPARAM wParam, LPARAM lParam) {
         PKBDLLHOOKSTRUCT pKey = (PKBDLLHOOKSTRUCT)lParam;
         switch (pKey->vkCode)
         {
-        case VK_HOME:
+        case VK_F7:
             on = !on;
             if (!on) {
 
                return yeet = 0;
-
+               
             }
             else {
 
                return yeet = 1;
 
             }
-        case VK_SHIFT:
-        case VK_LSHIFT:
-        case VK_RSHIFT:
-        case VK_CONTROL:
-        case VK_MENU:
-            return 0;
-            break;
         case VK_CAPITAL:
             if (yeet == 1) {
 
@@ -72,7 +65,7 @@ LRESULT CALLBACK MyHook(int nCode, WPARAM wParam, LPARAM lParam) {
                 BASS_ChannelPlay(keyMovement, TRUE);
             }
             break;
-        case VK_INSERT:
+        case VK_F8:
             show = !show;
             if (!show)
             {
