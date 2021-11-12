@@ -23,7 +23,7 @@ If you wanna help me here, i would apperciate it, because im no user of C++ Actu
 
 ### How to close?
 
-- Press Insert
+- Press F8
 - Close App Window
 
 ### How to build?
