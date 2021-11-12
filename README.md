@@ -7,6 +7,11 @@
 - Open the App
 - If a Window Pops up, press insert to Hide in Background
 
+### How to mute it when you play a Game?
+
+- Press Home Button to turn off all Sound
+- Press Home to turn on again
+
 ### How to close?
 
 - Press Insert
