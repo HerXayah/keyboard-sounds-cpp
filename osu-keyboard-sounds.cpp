@@ -7,6 +7,10 @@ using namespace std;
 HHOOK hHook = NULL;
 
 bool show = false;
+bool on = true;
+
+// to turn off the Input detection
+static int yeet = 1;
 
 HSTREAM keyCaps;
 HSTREAM keyConfirm;
@@ -24,6 +28,18 @@ LRESULT CALLBACK MyHook(int nCode, WPARAM wParam, LPARAM lParam) {
         PKBDLLHOOKSTRUCT pKey = (PKBDLLHOOKSTRUCT)lParam;
         switch (pKey->vkCode)
         {
+        case VK_HOME:
+            on = !on;
+            if (!on) {
+
+               return yeet = 0;
+
+            }
+            else {
+
+               return yeet = 1;
+
+            }
         case VK_SHIFT:
         case VK_LSHIFT:
         case VK_RSHIFT:
@@ -32,21 +48,31 @@ LRESULT CALLBACK MyHook(int nCode, WPARAM wParam, LPARAM lParam) {
             return 0;
             break;
         case VK_CAPITAL:
-            BASS_ChannelPlay(keyCaps, TRUE);
+            if (yeet == 1) {
+
+
+                BASS_ChannelPlay(keyCaps, TRUE);
+            }
             break;
         case VK_RETURN:
-            BASS_ChannelPlay(keyConfirm, TRUE);
+            if (yeet == 1) {
+                BASS_ChannelPlay(keyConfirm, TRUE);
+            }
             break;
         case VK_BACK:
-            BASS_ChannelPlay(keyDelete, TRUE);
+            if (yeet == 1) {
+                BASS_ChannelPlay(keyDelete, TRUE);
+            }
             break;
         case VK_LEFT:
         case VK_UP:
         case VK_RIGHT:
         case VK_DOWN:
-            BASS_ChannelPlay(keyMovement, TRUE);
+            if (yeet == 1) {
+                BASS_ChannelPlay(keyMovement, TRUE);
+            }
             break;
-        case VK_INSERT: 
+        case VK_INSERT:
             show = !show;
             if (!show)
             {
@@ -57,23 +83,25 @@ LRESULT CALLBACK MyHook(int nCode, WPARAM wParam, LPARAM lParam) {
                 ShowWindow(GetConsoleWindow(), SW_HIDE);
             }
         default:
-            switch (rand() % 4)
-            {
-            case 0:
-                BASS_ChannelPlay(keyPress1, TRUE);
-                break;
-            case 1:
-                BASS_ChannelPlay(keyPress2, TRUE);
-                break;
-            case 2:
-                BASS_ChannelPlay(keyPress3, TRUE);
-                break;
-            case 3:
-                BASS_ChannelPlay(keyPress4, TRUE);
-                break;
+            if (yeet == 1) {
+                switch (rand() % 4)
+                {
+                case 0:
+                    BASS_ChannelPlay(keyPress1, TRUE);
+                    break;
+                case 1:
+                    BASS_ChannelPlay(keyPress2, TRUE);
+                    break;
+                case 2:
+                    BASS_ChannelPlay(keyPress3, TRUE);
+                    break;
+                case 3:
+                    BASS_ChannelPlay(keyPress4, TRUE);
+                    break;
+                };
             };
-        };
-    } return CallNextHookEx(hHook, nCode, wParam, lParam);
+        } return CallNextHookEx(hHook, nCode, wParam, lParam);
+    }
 }
 
 int main()
