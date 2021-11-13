@@ -26,6 +26,8 @@ LRESULT CALLBACK MyHook(int nCode, WPARAM wParam, LPARAM lParam) {
     if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN)
     {
         PKBDLLHOOKSTRUCT pKey = (PKBDLLHOOKSTRUCT)lParam;
+        SHORT keyState = GetAsyncKeyState(pKey->vkCode);
+        if (keyState >= 0)
         switch (pKey->vkCode)
         {
         case VK_F7:
