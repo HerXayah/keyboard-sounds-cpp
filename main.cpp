@@ -50,8 +50,8 @@ std::vector<bool> keyboard(3000, false);
 void toggle(uiohook_event* const event) {
 
     if (event->type == _event_type::EVENT_KEY_PRESSED) {
-        if (!(keyboard[event->data.keyboard.keycode])) {
-            keyboard[event->data.keyboard.keycode] = true;
+        if (!(keyboard[event->data.keyboard.rawcode])) {
+            keyboard[event->data.keyboard.rawcode] = true;
         }
         else {
             return;
@@ -78,7 +78,7 @@ void toggle(uiohook_event* const event) {
         }
     }
     else if (event->type == _event_type::EVENT_KEY_RELEASED) {
-        keyboard[event->data.keyboard.keycode] = false;
+        keyboard[event->data.keyboard.rawcode] = false;
     }
 }
 
