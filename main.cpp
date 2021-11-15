@@ -39,44 +39,40 @@ bool hookstatus(bool stateOn) {
     return stateOn;
 }
 
+void playAudio(HSTREAM stream) {
+    if (soundState) {
+        BASS_ChannelPlay(stream, TRUE);
+    }
+    return;
+}
+
 //created my down Dispatch event
 void toggle(uiohook_event* const event) {
 
-    if (event->type == EVENT_KEY_PRESSED) {
+    if (event->type == _event_type::EVENT_KEY_PRESSED) {
         if (event->data.keyboard.keycode == VC_F7) {
-
-            if (soundState == true)
-            {
-
-                //BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 1);
-
-            }
-            else
-            {
-
-               // BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 0);
-
-            }
-
             soundState = !soundState;
         }
         else {
             switch (rand() % 4)
             {
             case 0:
-                BASS_ChannelPlay(keyPress1, TRUE);
+                playAudio(keyPress1);
                 break;
             case 1:
-                BASS_ChannelPlay(keyPress2, TRUE);
+                playAudio(keyPress2);
                 break;
             case 2:
-                BASS_ChannelPlay(keyPress3, TRUE);
+                playAudio(keyPress3);
                 break;
             case 3:
-                BASS_ChannelPlay(keyPress4, TRUE);
+                playAudio(keyPress4);
                 break;
             };
         }
+    }
+    else if (event->type == _event_type::EVENT_KEY_RELEASED) {
+
     }
 }
 
