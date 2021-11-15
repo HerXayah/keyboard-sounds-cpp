@@ -89,100 +89,33 @@ void dispatch_proc(uiohook_event* const event) {
 }
 
 int hookstatus(bool stateOn) {
-
     if (stateOn = true) {
-
         hook_run();
-
     }
-
     else {
-
         hook_stop();
-
     }
-
     return stateOn = !stateOn;
-
 }
 
 int main() {
 
     Tray::Tray tray("test", "icon.ico");
-
     tray.addEntry(Tray::Button("Exit", [&] { tray.exit(); }));
     tray.addEntry(Tray::Button("Test"))->setDisabled(true);
     tray.addEntry(Tray::Separator());
     tray.addEntry(Tray::Toggle("Test Toggle", true, [](bool stateOn) { hookstatus(stateOn); printf("Deine Mum: %i\n", stateOn); }));
     tray.addEntry(Tray::Toggle("Test Toggle", false, [](bool state) { printf("State: %i\n", state); }));
-
     tray.addEntry(Tray::Separator());
     tray.addEntry(Tray::Submenu("Test Submenu"))->addEntry(Tray::Button("Submenu button!"))->setDisabled(true);
 
-    
     hook_set_logger_proc(&logger_proc);
     hook_set_dispatch_proc(&dispatch_proc);
 
-    int status = hook_run();
-    switch (status) {
-    case UIOHOOK_SUCCESS:
-        break;
-
-    case UIOHOOK_ERROR_OUT_OF_MEMORY:
-        logger_proc(LOG_LEVEL_ERROR, "Failed to allocate memory. (%#X)", status);
-        break;
-
-    case UIOHOOK_ERROR_X_OPEN_DISPLAY:
-        logger_proc(LOG_LEVEL_ERROR, "Failed to open X11 display. (%#X)", status);
-        break;
-
-    case UIOHOOK_ERROR_X_RECORD_NOT_FOUND:
-        logger_proc(LOG_LEVEL_ERROR, "Unable to locate XRecord extension. (%#X)", status);
-        break;
-
-    case UIOHOOK_ERROR_X_RECORD_ALLOC_RANGE:
-        logger_proc(LOG_LEVEL_ERROR, "Unable to allocate XRecord range. (%#X)", status);
-        break;
-
-    case UIOHOOK_ERROR_X_RECORD_CREATE_CONTEXT:
-        logger_proc(LOG_LEVEL_ERROR, "Unable to allocate XRecord context. (%#X)", status);
-        break;
-
-    case UIOHOOK_ERROR_X_RECORD_ENABLE_CONTEXT:
-        logger_proc(LOG_LEVEL_ERROR, "Failed to enable XRecord context. (%#X)", status);
-        break;
-
-
-    case UIOHOOK_ERROR_SET_WINDOWS_HOOK_EX:
-        logger_proc(LOG_LEVEL_ERROR, "Failed to register low level windows hook. (%#X)", status);
-        break;
-
-
-    case UIOHOOK_ERROR_AXAPI_DISABLED:
-        logger_proc(LOG_LEVEL_ERROR, "Failed to enable access for assistive devices. (%#X)", status);
-        break;
-
-    case UIOHOOK_ERROR_CREATE_EVENT_PORT:
-        logger_proc(LOG_LEVEL_ERROR, "Failed to create apple event port. (%#X)", status);
-        break;
-
-    case UIOHOOK_ERROR_CREATE_RUN_LOOP_SOURCE:
-        logger_proc(LOG_LEVEL_ERROR, "Failed to create apple run loop source. (%#X)", status);
-        break;
-
-    case UIOHOOK_ERROR_GET_RUNLOOP:
-        logger_proc(LOG_LEVEL_ERROR, "Failed to acquire apple run loop. (%#X)", status);
-        break;
-
-    case UIOHOOK_ERROR_CREATE_OBSERVER:
-        logger_proc(LOG_LEVEL_ERROR, "Failed to create apple run loop observer. (%#X)", status);
-        break;
-
-    case UIOHOOK_FAILURE:
-    default:
-        logger_proc(LOG_LEVEL_ERROR, "An unknown hook error occurred. (%#X)", status);
-        break;
-    }
     tray.run();
-    return status;
+
+    //Debug 
+/*  int status = hook_run();
+
+    return status; */
 }
