@@ -24,19 +24,14 @@ HSTREAM keyPress3;
 HSTREAM keyPress4;
 HANDLE mutex;
 
+Tray::Tray* trayy;
 bool soundState = true;
 
-bool hookstatus(bool stateOn) {
-    if (stateOn == true) {
-        // sound library mute
-    }
-    else {
-        // sound library mute
-    }
+bool toogleMuteUnmute() {
+    soundState = !soundState;
+    trayy->update();
 
-    stateOn = !stateOn;
-    soundState = stateOn;
-    return stateOn;
+    return soundState;
 }
 
 void playAudio(HSTREAM stream) {
@@ -50,7 +45,7 @@ std::vector<bool> keyboard(3000, false);
 
 void toggle(uiohook_event* const event) {
 
-    if (event->type == _event_type::EVENT_KEY_PRESSED) {
+    if (event->type == ::_event_type::EVENT_KEY_PRESSED) {
         if (!(keyboard[event->data.keyboard.rawcode])) {
             keyboard[event->data.keyboard.rawcode] = true;
         }
@@ -58,7 +53,7 @@ void toggle(uiohook_event* const event) {
             return;
         }
         if (event->data.keyboard.keycode == VC_F7) {
-            soundState = !soundState;
+            toogleMuteUnmute();
         }
         else {
             switch (rand() % 4)
@@ -78,7 +73,7 @@ void toggle(uiohook_event* const event) {
             };
         }
     }
-    else if (event->type == _event_type::EVENT_KEY_RELEASED) {
+    else if (event->type == ::_event_type::EVENT_KEY_RELEASED) {
         keyboard[event->data.keyboard.rawcode] = false;
     }
 }
@@ -103,7 +98,7 @@ int main() {
     if (GetLastError() == ERROR_ALREADY_EXISTS)
     {
         ShowWindow(GetConsoleWindow(), SW_SHOW);
-        printf("Application already open. Look into your Taskbar %i\n");
+        printf("Application already open. Look into your Taskbar.\n");
         Sleep(1000);
         exit(0);
     }
@@ -112,6 +107,7 @@ int main() {
     HICON AppIcon = LoadIcon(hInst, MAKEINTRESOURCE(101));
 
     Tray::Tray tray("Keyboard Sounds", AppIcon);
+    trayy = &tray;
     tray.addEntry(Tray::Submenu("Volume"))->addEntries(
         Tray::Button("25%", [&] {BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 2500); }),
         Tray::Button("50%", [&] {BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 5000); }),
@@ -119,7 +115,7 @@ int main() {
         Tray::Button("100%", [&] {BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 10000); })
     );
     tray.addEntry(Tray::Separator());
-    tray.addEntry(Tray::Toggle("Sound", true, [](bool stateOn) { printf("Deine Mum: %i\n", stateOn); }));
+    tray.addEntry(Tray::SyncedToggle("Sound", soundState));
     tray.addEntry(Tray::Separator());
     tray.addEntry(Tray::Button("Exit", [&] { tray.exit(); hook_stop(); exit(0); CloseHandle(mutex); }));
     tray.addEntry(Tray::Label("made by nice ppl"));
