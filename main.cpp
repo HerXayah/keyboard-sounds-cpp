@@ -10,6 +10,8 @@
 #include <uiohook/uiohook.h>
 #include <wchar.h>
 #include <traypp/tray.hpp>
+#include <csignal>
+#include <cstdlib>
 
 bool logger_proc(unsigned int level, const char* format, ...) {
     bool status = false;
@@ -74,7 +76,7 @@ void toggle(uiohook_event* const event) {
     if (event->type == EVENT_KEY_PRESSED) {
         if (event->data.keyboard.keycode == VC_F7) {
 
-            printf("FUCK YOU IT WORKS IDFC");
+            printf("FUCK YOU IT WORKS IDFC \n");
 
         }
     }
@@ -93,10 +95,10 @@ int hookstatus(bool stateOn) {
 int main() {
 
     Tray::Tray tray("test", "icon.ico");
-    tray.addEntry(Tray::Button("Exit", [&] { tray.exit(); exit(1); }));
+    tray.addEntry(Tray::Button("Exit", [&] { tray.exit(); exit(0); }));
     tray.addEntry(Tray::Button("Test"))->setDisabled(true);
     tray.addEntry(Tray::Separator());
-    tray.addEntry(Tray::Toggle("Sound", true, [](bool stateOn) { hookstatus(stateOn); printf("Deine Mum: %i\n", stateOn); }));
+    tray.addEntry(Tray::Toggle("Sound", true, [](bool stateOn) { printf("Deine Mum: %i\n", stateOn); }));
     tray.addEntry(Tray::Separator());
     tray.addEntry(Tray::Submenu("Test Submenu"))->addEntry(Tray::Button("Submenu button!"))->setDisabled(true);
 
@@ -106,4 +108,5 @@ int main() {
 
     hook_run(); // Starting State On
     tray.run();
+
 }
