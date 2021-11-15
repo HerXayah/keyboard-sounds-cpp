@@ -80,6 +80,7 @@ void toggle(uiohook_event* const event) {
 
 int main() {
 
+
     BASS_Init(-1, 44100, 0, 0, NULL);
 
     keyCaps = BASS_StreamCreateFile(FALSE, "./sounds/keyCaps.mp3", 0, 0, 0);
@@ -91,16 +92,17 @@ int main() {
     keyPress3 = BASS_StreamCreateFile(FALSE, "./sounds/keyPress3.mp3", 0, 0, 0);
     keyPress4 = BASS_StreamCreateFile(FALSE, "./sounds/keyPress4.mp3", 0, 0, 0);
 
+    // Hide Window
+    //ShowWindow(GetConsoleWindow(), SW_HIDE);
+
+
     HINSTANCE hInst = GetModuleHandle(NULL);
     HICON AppIcon = LoadIcon(hInst, MAKEINTRESOURCE(101));
 
     Tray::Tray tray("Keyboard Sounds", AppIcon);
     tray.addEntry(Tray::Button("Exit", [&] { tray.exit(); hook_stop(); exit(0); }));
-    tray.addEntry(Tray::Button("Test"))->setDisabled(true);
     tray.addEntry(Tray::Separator());
     tray.addEntry(Tray::Toggle("Sound", true, [](bool stateOn) { printf("Deine Mum: %i\n", stateOn); }));
-    tray.addEntry(Tray::Separator());
-    tray.addEntry(Tray::Submenu("Test Submenu"))->addEntry(Tray::Button("Submenu button!"))->setDisabled(true);
 
     hook_set_dispatch_proc(&toggle);
 
