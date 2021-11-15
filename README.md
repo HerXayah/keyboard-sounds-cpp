@@ -1,13 +1,12 @@
 # ⌨ Keyboard Sounds but better
-- This cpp console application: plays keyboard sound effects, when you press keyboard 😳
-- [Original](https://github.com/KerimPotter/osu-keyboard-sounds-cpp)
+- This App plays keyboard sound effects, when you press keyboard keys 😳
 
 ### NEED HELP!
 
 - Keybinds like CTRL ALT P. Havent been able to get them to work
 - Custom Keybinds
-- Tray Icon to turn on and off (maybe)
-- Disable the sound when holding a button.
+- Tray Icon to turn on and off (maybe) // Done 
+- Disable the sound when holding a button. // Semi Done
 
 If you wanna help me here, i would apperciate it, because im no user of C++ Actually.
 
