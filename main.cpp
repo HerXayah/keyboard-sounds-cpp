@@ -13,6 +13,7 @@
 #include <csignal>
 #include <cstdlib>
 #include <BASS/bass.h>
+#include <vector>
 
 HSTREAM keyCaps;
 HSTREAM keyConfirm;
@@ -46,10 +47,18 @@ void playAudio(HSTREAM stream) {
     return;
 }
 
+std::vector<bool> keyboard(3000, false);
+
 //created my down Dispatch event
 void toggle(uiohook_event* const event) {
 
     if (event->type == _event_type::EVENT_KEY_PRESSED) {
+        if (!(keyboard[event->data.keyboard.keycode])) {
+            keyboard[event->data.keyboard.keycode] = true;
+        }
+        else {
+            return;
+        }
         if (event->data.keyboard.keycode == VC_F7) {
             soundState = !soundState;
         }
@@ -72,7 +81,7 @@ void toggle(uiohook_event* const event) {
         }
     }
     else if (event->type == _event_type::EVENT_KEY_RELEASED) {
-
+        keyboard[event->data.keyboard.keycode] = false;
     }
 }
 
