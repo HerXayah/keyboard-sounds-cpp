@@ -13,6 +13,8 @@
 #include <csignal>
 #include <cstdlib>
 
+bool soundState = true;
+
 bool logger_proc(unsigned int level, const char* format, ...) {
     bool status = false;
 
@@ -69,27 +71,37 @@ void dispatch_proc(uiohook_event* const event) {
     fprintf(stdout, "%s\n", buffer);
 }
 
-//created my down Dispatch event
-
-void toggle(uiohook_event* const event) {
-
-    if (event->type == EVENT_KEY_PRESSED) {
-        if (event->data.keyboard.keycode == VC_F7) {
-
-            printf("FUCK YOU IT WORKS IDFC \n");
-
-        }
-    }
-}
-
-int hookstatus(bool stateOn) {
+bool hookstatus(bool stateOn) {
     if (stateOn == true) {
         hook_run();
     }
     else {
         hook_stop();
     }
-    return stateOn = !stateOn;
+
+    stateOn = !stateOn;
+    soundState = stateOn;
+    return stateOn;
+}
+
+//created my down Dispatch event
+void toggle(uiohook_event* const event) {
+
+    if (event->type == EVENT_KEY_PRESSED) {
+        if (event->data.keyboard.keycode == VC_F7) {
+
+            if (soundState)
+            {
+                hook_run();
+                printf("Deine Vadda: %i\n", soundState);
+            }
+            else
+            {
+                hook_stop();
+                printf("Deine Mum: %i\n", soundState);
+            }
+        }
+    }
 }
 
 int main() {
