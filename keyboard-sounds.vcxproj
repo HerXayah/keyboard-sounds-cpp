@@ -150,7 +150,7 @@
     <ResourceCompile Include="resource.rc" />
   </ItemGroup>
   <ItemGroup>
-    <CopyFileToFolders Include="icon.ico" />
+    <Image Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resource.aps" />

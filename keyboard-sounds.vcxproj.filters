@@ -35,8 +35,8 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CopyFileToFolders Include="icon.ico">
+    <Image Include="icon.ico">
       <Filter>Resource Files</Filter>
-    </CopyFileToFolders>
+    </Image>
   </ItemGroup>
 </Project>

@@ -44,6 +44,8 @@ void toggle(uiohook_event* const event) {
                 // sound library mute
                 printf("Deine Mum: %i\n", soundState);
             }
+
+            soundState = !soundState;
         }
     }
 }
