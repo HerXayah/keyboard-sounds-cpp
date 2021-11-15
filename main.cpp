@@ -22,6 +22,7 @@ HSTREAM keyPress1;
 HSTREAM keyPress2;
 HSTREAM keyPress3;
 HSTREAM keyPress4;
+HANDLE mutex;
 
 bool soundState = true;
 
@@ -98,6 +99,15 @@ int main() {
     // Hide Window
     ShowWindow(GetConsoleWindow(), SW_HIDE);
 
+    mutex = CreateMutex(NULL, TRUE, L"keyboard-sounds");
+    if (GetLastError() == ERROR_ALREADY_EXISTS)
+    {
+        ShowWindow(GetConsoleWindow(), SW_SHOW);
+        printf("Application already open. Look into your Taskbar %i\n");
+        Sleep(1000);
+        exit(0);
+    }
+
     HINSTANCE hInst = GetModuleHandle(NULL);
     HICON AppIcon = LoadIcon(hInst, MAKEINTRESOURCE(101));
 
@@ -111,7 +121,7 @@ int main() {
     tray.addEntry(Tray::Separator());
     tray.addEntry(Tray::Toggle("Sound", true, [](bool stateOn) { printf("Deine Mum: %i\n", stateOn); }));
     tray.addEntry(Tray::Separator());
-    tray.addEntry(Tray::Button("Exit", [&] { tray.exit(); hook_stop(); exit(0);}));
+    tray.addEntry(Tray::Button("Exit", [&] { tray.exit(); hook_stop(); exit(0); CloseHandle(mutex);}));
     tray.addEntry(Tray::Label("made by nice ppl"));
 
     hook_set_dispatch_proc(&toggle);
