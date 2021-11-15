@@ -85,10 +85,10 @@ int hookstatus(bool stateOn) {
 int main() {
 
     Tray::Tray tray("test", "icon.ico");
-    tray.addEntry(Tray::Button("Exit", [&] { tray.exit(); }));
+    tray.addEntry(Tray::Button("Exit", [&] { tray.exit(); exit(1); }));
     tray.addEntry(Tray::Button("Test"))->setDisabled(true);
     tray.addEntry(Tray::Separator());
-    tray.addEntry(Tray::Toggle("toogle", true, [](bool stateOn) { hookstatus(stateOn); printf("Deine Mum: %i\n", stateOn); }));
+    tray.addEntry(Tray::Toggle("Sound", true, [](bool stateOn) { hookstatus(stateOn); printf("Deine Mum: %i\n", stateOn); }));
     tray.addEntry(Tray::Separator());
     tray.addEntry(Tray::Submenu("Test Submenu"))->addEntry(Tray::Button("Submenu button!"))->setDisabled(true);
 
