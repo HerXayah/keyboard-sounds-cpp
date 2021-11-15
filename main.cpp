@@ -40,6 +40,8 @@ bool logger_proc(unsigned int level, const char* format, ...) {
 // takes too long to process.  If you need to do any extended processing, please 
 // do so by copying the event to your own queued dispatch thread.
 
+
+// this can be deleted if we dont need it since its just debug
 void dispatch_proc(uiohook_event* const event) {
     char buffer[256] = { 0 };
     size_t length = snprintf(buffer, sizeof(buffer),
@@ -47,13 +49,6 @@ void dispatch_proc(uiohook_event* const event) {
         event->type, event->time, event->mask);
 
     switch (event->type) {
-    case EVENT_KEY_PRESSED:
-        // If the escape key is pressed, naturally terminate the program.
-        if (event->data.keyboard.keycode == VC_F7) {
-
-            break;
-
-        }
     case EVENT_KEY_RELEASED:
         snprintf(buffer + length, sizeof(buffer) - length,
             ",keycode=%u,rawcode=0x%X",
@@ -70,6 +65,19 @@ void dispatch_proc(uiohook_event* const event) {
         return;
     }
     fprintf(stdout, "%s\n", buffer);
+}
+
+//created my down Dispatch event
+
+void toggle(uiohook_event* const event) {
+
+    if (event->type == EVENT_KEY_PRESSED) {
+        if (event->data.keyboard.keycode == VC_F7) {
+
+            printf("FUCK YOU IT WORKS IDFC");
+
+        }
+    }
 }
 
 int hookstatus(bool stateOn) {
@@ -93,7 +101,8 @@ int main() {
     tray.addEntry(Tray::Submenu("Test Submenu"))->addEntry(Tray::Button("Submenu button!"))->setDisabled(true);
 
     hook_set_logger_proc(&logger_proc);
-    hook_set_dispatch_proc(&dispatch_proc);
+    hook_set_dispatch_proc(&toggle);
+    // hook_set_dispatch_proc(&dispatch_proc);
 
     hook_run(); // Starting State On
     tray.run();
