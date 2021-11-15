@@ -13,6 +13,7 @@
 #include <csignal>
 #include <cstdlib>
 #include <BASS/bass.h>
+#include <vector>
 
 HSTREAM keyCaps;
 HSTREAM keyConfirm;
