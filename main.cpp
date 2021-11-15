@@ -92,7 +92,17 @@ int main() {
     BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 5000);
 
     // Hide Window
-    ShowWindow(GetConsoleWindow(), SW_HIDE);
+
+    if (_WIN32 || _WIN64) {
+
+        ShowWindow(GetConsoleWindow(), SW_HIDE);
+
+    }
+    else {
+
+        FreeConsole();
+
+    }
 
     mutex = CreateMutex(NULL, TRUE, L"keyboard-sounds");
     if (GetLastError() == ERROR_ALREADY_EXISTS)
