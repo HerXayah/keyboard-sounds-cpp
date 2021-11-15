@@ -1,6 +1,2 @@
 ﻿     Creating library D:\DevStuff\osu-keyboard-sounds-cpp\x64\Debug\keyboard-sounds.lib and object D:\DevStuff\osu-keyboard-sounds-cpp\x64\Debug\keyboard-sounds.exp
-main.obj : error LNK2019: unresolved external symbol BASS_Init referenced in function main
-main.obj : error LNK2019: unresolved external symbol BASS_StreamCreateFile referenced in function main
-main.obj : error LNK2019: unresolved external symbol BASS_ChannelPlay referenced in function "void __cdecl toggle(struct _uiohook_event * const)" (?toggle@@YAXQEAU_uiohook_event@@@Z)
-D:\DevStuff\osu-keyboard-sounds-cpp\dependencies\lib\BASS\\bass.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
-D:\DevStuff\osu-keyboard-sounds-cpp\x64\Debug\keyboard-sounds.exe : fatal error LNK1120: 3 unresolved externals
+  keyboard-sounds.vcxproj -> D:\DevStuff\osu-keyboard-sounds-cpp\x64\Debug\keyboard-sounds.exe
