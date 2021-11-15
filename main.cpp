@@ -1,6 +1,14 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
+#ifdef __unix__         
+...
+#elif defined(_WIN32) || defined(WIN32) 
+
+#define OS_Windows
+
+#endif
+
 
 #include <inttypes.h>
 #include <stdarg.h>
@@ -91,18 +99,11 @@ int main() {
     keyPress4 = BASS_StreamCreateFile(FALSE, "./sounds/keyPress4.mp3", 0, 0, 0);
     BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 5000);
 
-    // Hide Window
-
-    if (_WIN32 || _WIN64) {
-
-        ShowWindow(GetConsoleWindow(), SW_HIDE);
-
-    }
-    else {
-
-        FreeConsole();
-
-    }
+#ifdef OS_Windows
+    ShowWindow(GetConsoleWindow(), SW_HIDE);
+#else
+    FreeConsole();
+#endif    
 
     mutex = CreateMutex(NULL, TRUE, L"keyboard-sounds");
     if (GetLastError() == ERROR_ALREADY_EXISTS)
