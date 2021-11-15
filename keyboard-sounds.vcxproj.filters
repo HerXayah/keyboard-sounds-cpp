@@ -28,15 +28,25 @@
     <None Include="resource.aps">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="dependencies\lib\BASS\bass.dll" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\inludes\BASS\bass.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="icon.ico">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="bass.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="dependencies\lib\BASS\bass.lib" />
   </ItemGroup>
 </Project>

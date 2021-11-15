@@ -47,13 +47,15 @@ void toggle(uiohook_event* const event) {
 
             if (soundState == true)
             {
-                // sound library mute
-                printf("Deine Vadda: %i\n", soundState);
+
+                //BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 1);
+
             }
             else
             {
-                // sound library mute
-                printf("Deine Mum: %i\n", soundState);
+
+               // BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 0);
+
             }
 
             soundState = !soundState;

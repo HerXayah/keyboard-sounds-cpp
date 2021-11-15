@@ -122,7 +122,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)dependencies\lib\traypp\Debug;$(ProjectDir)dependencies\lib\libuiohooks\Debug;$(ProjectDir)dependencies\lib\BASS\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)dependencies\lib\traypp\Debug;$(ProjectDir)dependencies\lib\libuiohooks\Debug;$(ProjectDir)dependencies\lib\BASS\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>tray.lib;uiohook.lib;bass.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -153,10 +153,18 @@
     <Image Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>
+    <CopyFileToFolders Include="bass.dll">
+      <FileType>Document</FileType>
+    </CopyFileToFolders>
+    <None Include="dependencies\lib\BASS\bass.dll" />
     <None Include="resource.aps" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="dependencies\inludes\BASS\bass.h" />
     <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="dependencies\lib\BASS\bass.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
