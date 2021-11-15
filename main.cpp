@@ -52,16 +52,16 @@ void toggle(uiohook_event* const event) {
 
 int main() {
 
+    // Hide Window
+    //ShowWindow(GetConsoleWindow(), SW_HIDE);
+
     HINSTANCE hInst = GetModuleHandle(NULL);
     HICON AppIcon = LoadIcon(hInst, MAKEINTRESOURCE(101));
 
     Tray::Tray tray("Keyboard Sounds", AppIcon);
     tray.addEntry(Tray::Button("Exit", [&] { tray.exit(); hook_stop(); exit(0); }));
-    tray.addEntry(Tray::Button("Test"))->setDisabled(true);
     tray.addEntry(Tray::Separator());
     tray.addEntry(Tray::Toggle("Sound", true, [](bool stateOn) { printf("Deine Mum: %i\n", stateOn); }));
-    tray.addEntry(Tray::Separator());
-    tray.addEntry(Tray::Submenu("Test Submenu"))->addEntry(Tray::Button("Submenu button!"))->setDisabled(true);
 
     hook_set_dispatch_proc(&toggle);
 
