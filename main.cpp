@@ -113,15 +113,15 @@ int main() {
 
     Tray::Tray tray("Keyboard Sounds", AppIcon);
     tray.addEntry(Tray::Submenu("Volume"))->addEntries(
-        Tray::Button("25%", [&] {BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 2500);}),
-        Tray::Button("50%", [&] {BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 5000);}),
-        Tray::Button("75%", [&] {BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 7500);}),
-        Tray::Button("100%", [&] {BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 10000);})
+        Tray::Button("25%", [&] {BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 2500); }),
+        Tray::Button("50%", [&] {BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 5000); }),
+        Tray::Button("75%", [&] {BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 7500); }),
+        Tray::Button("100%", [&] {BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 10000); })
     );
     tray.addEntry(Tray::Separator());
     tray.addEntry(Tray::Toggle("Sound", true, [](bool stateOn) { printf("Deine Mum: %i\n", stateOn); }));
     tray.addEntry(Tray::Separator());
-    tray.addEntry(Tray::Button("Exit", [&] { tray.exit(); hook_stop(); exit(0); CloseHandle(mutex);}));
+    tray.addEntry(Tray::Button("Exit", [&] { tray.exit(); hook_stop(); exit(0); CloseHandle(mutex); }));
     tray.addEntry(Tray::Label("made by nice ppl"));
 
     hook_set_dispatch_proc(&toggle);
