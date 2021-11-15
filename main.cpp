@@ -12,6 +12,17 @@
 #include <traypp/tray.hpp>
 #include <csignal>
 #include <cstdlib>
+#include <BASS/bass.h>
+
+HSTREAM keyCaps;
+HSTREAM keyConfirm;
+HSTREAM keyDelete;
+HSTREAM keyMovement;
+HSTREAM keyPress1;
+HSTREAM keyPress2;
+HSTREAM keyPress3;
+HSTREAM keyPress4;
+
 
 bool soundState = true;
 
@@ -47,10 +58,38 @@ void toggle(uiohook_event* const event) {
 
             soundState = !soundState;
         }
+        else {
+            switch (rand() % 4)
+            {
+            case 0:
+                BASS_ChannelPlay(keyPress1, TRUE);
+                break;
+            case 1:
+                BASS_ChannelPlay(keyPress2, TRUE);
+                break;
+            case 2:
+                BASS_ChannelPlay(keyPress3, TRUE);
+                break;
+            case 3:
+                BASS_ChannelPlay(keyPress4, TRUE);
+                break;
+            };
+        }
     }
 }
 
 int main() {
+
+    BASS_Init(-1, 44100, 0, 0, NULL);
+
+    keyCaps = BASS_StreamCreateFile(FALSE, "./sounds/keyCaps.mp3", 0, 0, 0);
+    keyConfirm = BASS_StreamCreateFile(FALSE, "./sounds/keyConfirm.mp3", 0, 0, 0);
+    keyDelete = BASS_StreamCreateFile(FALSE, "./sounds/keyDelete.mp3", 0, 0, 0);
+    keyMovement = BASS_StreamCreateFile(FALSE, "./sounds/keyMovement.mp3", 0, 0, 0);
+    keyPress1 = BASS_StreamCreateFile(FALSE, "./sounds/keyPress1.mp3", 0, 0, 0);
+    keyPress2 = BASS_StreamCreateFile(FALSE, "./sounds/keyPress2.mp3", 0, 0, 0);
+    keyPress3 = BASS_StreamCreateFile(FALSE, "./sounds/keyPress3.mp3", 0, 0, 0);
+    keyPress4 = BASS_StreamCreateFile(FALSE, "./sounds/keyPress4.mp3", 0, 0, 0);
 
     HINSTANCE hInst = GetModuleHandle(NULL);
     HICON AppIcon = LoadIcon(hInst, MAKEINTRESOURCE(101));
