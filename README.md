@@ -6,29 +6,28 @@
 ### NEED HELP!
 
 - Keybinds like CTRL ALT P. Havent been able to get them to work
-- Custom Keybinds
+- Custom Keybinds // Working on it
 - Tray Icon to turn on and off (maybe) // Done 
-- Disable the sound when holding a button. // Semi Done
+- Disable the sound when holding a button. // Done
 
 If you wanna help me here, i would apperciate it, because im no user of C++ Actually.
 
 ### How to use?
 
 - Open the App
-- If a Window Pops up, press F8 to Hide in Background
 
 ### How to mute it when you play a Game?
 
 - Press F7 Button to turn off all Sound
 - Press F7 to turn on again
 
+or use the TrayIcon
+
 ### How to close?
 
-- Press Insert
-- Close App Window
+- Close via the Tray Icon
 
 ### How to build?
 
-- Open it in VSCode
-- Select x86 and Release
+- Open it in VS
 - Build
