@@ -23,8 +23,8 @@
 
 using json = nlohmann::json;
 
-std::ifstream configfile("config.json", std::ifstream::binary);
-configfile >> keylist;
+//std::ifstream configfile("config.json", std::ifstream::binary);
+//configfile >> keylist;
 
 HSTREAM keyCaps;
 HSTREAM keyConfirm;
@@ -63,7 +63,7 @@ void toggle(uiohook_event* const event) {
         else {
             return;
         }
-        if (event->data.keyboard.keycode == VC_F7) 
+        if (event->data.keyboard.keycode == VC_F7) {
             toogleMuteUnmute();
         }
         else {
