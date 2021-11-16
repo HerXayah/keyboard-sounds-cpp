@@ -14,11 +14,11 @@
 #include <string.h>
 #include <uiohook/uiohook.h>
 #include <wchar.h>
-#include <traypp/tray.hpp>B
+#include <traypp/tray.hpp>
 #include <csignal>
 #include <cstdlib>
 #include <BASS/bass.h>
-#include <json/json.h>
+#include <nlohmann/json.hpp>
 
 HSTREAM keyCaps;
 HSTREAM keyConfirm;
