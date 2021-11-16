@@ -20,6 +20,8 @@
 #include <BASS/bass.h>
 #include <nlohmann/json.hpp>
 
+using json = nlohmann::json;
+
 HSTREAM keyCaps;
 HSTREAM keyConfirm;
 HSTREAM keyDelete;
