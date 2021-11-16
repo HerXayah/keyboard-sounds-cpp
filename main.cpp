@@ -4,11 +4,8 @@
 #ifdef __unix__         
 ...
 #elif defined(_WIN32) || defined(WIN32) 
-
 #define OS_Windows
-
 #endif
-
 
 #include <inttypes.h>
 #include <stdarg.h>
@@ -17,10 +14,11 @@
 #include <string.h>
 #include <uiohook/uiohook.h>
 #include <wchar.h>
-#include <traypp/tray.hpp>
+#include <traypp/tray.hpp>B
 #include <csignal>
 #include <cstdlib>
 #include <BASS/bass.h>
+#include <json/json.h>
 
 HSTREAM keyCaps;
 HSTREAM keyConfirm;
@@ -38,7 +36,6 @@ bool soundState = true;
 bool toogleMuteUnmute() {
     soundState = !soundState;
     trayy->update();
-
     return soundState;
 }
 
@@ -60,7 +57,7 @@ void toggle(uiohook_event* const event) {
         else {
             return;
         }
-        if (event->data.keyboard.keycode == VC_F7) {
+        if (event->data.keyboard.keycode == VC_F7) 
             toogleMuteUnmute();
         }
         else {

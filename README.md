@@ -37,3 +37,4 @@ or use the TrayIcon
 - https://github.com/Soundux/traypp
 - https://www.un4seen.com/
 - https://github.com/wilix-team/iohook
+- https://github.com/open-source-parsers/jsoncpp
