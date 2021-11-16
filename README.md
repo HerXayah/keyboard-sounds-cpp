@@ -34,6 +34,6 @@ or use the TrayIcon
 
 ### Used
 
-- (traypp)[https://github.com/Soundux/traypp]
-- (BASS)[https://www.un4seen.com/]
-- (uiohook)[https://github.com/wilix-team/iohook]
+- https://github.com/Soundux/traypp
+- https://www.un4seen.com/
+- https://github.com/wilix-team/iohook
