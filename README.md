@@ -31,3 +31,9 @@ or use the TrayIcon
 
 - Open it in VS
 - Build
+
+### Used
+
+- (traypp)[https://github.com/Soundux/traypp]
+- (BASS)[https://www.un4seen.com/]
+- (uiohook)[https://github.com/wilix-team/iohook]
