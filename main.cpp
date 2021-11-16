@@ -19,8 +19,12 @@
 #include <cstdlib>
 #include <BASS/bass.h>
 #include <nlohmann/json.hpp>
+#include <fstream>
 
 using json = nlohmann::json;
+
+std::ifstream configfile("config.json", std::ifstream::binary);
+configfile >> keylist;
 
 HSTREAM keyCaps;
 HSTREAM keyConfirm;
