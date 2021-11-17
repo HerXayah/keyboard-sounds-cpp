@@ -19,12 +19,13 @@
 #include <cstdlib>
 #include <BASS/bass.h>
 #include <nlohmann/json.hpp>
+#include <filesystem>
+#include <iostream>
 #include <fstream>
+#include "keycodes.h"
 
 using json = nlohmann::json;
-
-//std::ifstream configfile("config.json", std::ifstream::binary);
-//configfile >> keylist;
+json config;
 
 HSTREAM keyCaps;
 HSTREAM keyConfirm;
@@ -38,6 +39,8 @@ HANDLE mutex;
 
 Tray::Tray* trayy;
 bool soundState = true;
+
+uint16_t muteKey = VC_F7;
 
 bool toogleMuteUnmute() {
     soundState = !soundState;
@@ -63,7 +66,7 @@ void toggle(uiohook_event* const event) {
         else {
             return;
         }
-        if (event->data.keyboard.keycode == VC_F7) {
+        if (event->data.keyboard.keycode == muteKey) {
             toogleMuteUnmute();
         }
         else {
@@ -90,6 +93,16 @@ void toggle(uiohook_event* const event) {
 }
 
 int main() {
+    
+    if (std::filesystem::exists("config.json")) {
+        std::ifstream in("config.json");
+        config << in;
+        std::cout << "Mute/Unmute toogle key is " << config["toogle"].get<std::string>();
+        muteKey = keycodes[config["toogle"].get<std::string>()];
+    }
+    else {
+        std::cerr << "config.json doesn't exist.";
+    }
 
     BASS_Init(-1, 44100, 0, 0, NULL);
     keyCaps = BASS_StreamCreateFile(FALSE, "./sounds/keyCaps.mp3", 0, 0, 0);

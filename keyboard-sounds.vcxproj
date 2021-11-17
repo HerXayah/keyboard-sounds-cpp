@@ -164,9 +164,9 @@
     <Image Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <CopyFileToFolders Include="bass.dll">
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
+      <CopyFileToFolders Include="bass.dll">
+          <FileType>Document</FileType>
+      </CopyFileToFolders>
       <None Include="dependencies\lib\BASS\bass.dll"/>
       <None Include="resource.aps"/>
   </ItemGroup>
@@ -178,7 +178,9 @@
         <Library Include="dependencies\lib\BASS\bass.lib"/>
     </ItemGroup>
     <ItemGroup>
-        <Content Include="config.json"/>
+        <Content Include="config.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
     <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
     <ImportGroup Label="ExtensionTargets">

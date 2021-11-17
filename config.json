@@ -1,2 +1,33 @@
 ﻿{
+  "name": "osu",
+  "sounds": {
+    "keyCaps": "sounds/keyCaps.mp3",
+    "keyConfirm": "sounds/keyConfirm.mp3",
+    "keyDelete": "sounds/keyDelete.mp3",
+    "keyMovement": "sounds/keyMovement.mp3",
+    "keyPress1": "sounds/keyPress1.mp3",
+    "keyPress2": "sounds/keyPress2.mp3",
+    "keyPress3": "sounds/keyPress3.mp3",
+    "keyPress4": "sounds/keyPress4.mp3"
+  },
+  "toogle": "VC_F7",
+  "keys": {
+    "F7": "keyConfirm",
+    "CAPS": {
+      "type": "counter",
+      "sounds": [
+        "keyCaps",
+        "keyConfirm"
+      ]
+    },
+    "default": {
+      "type": "random",
+      "sounds": [
+        "keyPress1",
+        "keyPress2",
+        "keyPress3",
+        "keyPress4"
+      ]
+    }
+  }
 }
