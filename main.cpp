@@ -39,7 +39,6 @@ HANDLE mutex;
 
 Tray::Tray* trayy;
 bool soundState = true;
-
 uint16_t muteKey = VC_F7;
 
 bool toogleMuteUnmute() {
