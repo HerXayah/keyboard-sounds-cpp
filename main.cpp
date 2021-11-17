@@ -104,14 +104,14 @@ int main() {
     }
 
     BASS_Init(-1, 44100, 0, 0, NULL);
-    keyCaps = BASS_StreamCreateFile(FALSE, "./sounds/keyCaps.mp3", 0, 0, 0);
-    keyConfirm = BASS_StreamCreateFile(FALSE, "./sounds/keyConfirm.mp3", 0, 0, 0);
-    keyDelete = BASS_StreamCreateFile(FALSE, "./sounds/keyDelete.mp3", 0, 0, 0);
-    keyMovement = BASS_StreamCreateFile(FALSE, "./sounds/keyMovement.mp3", 0, 0, 0);
-    keyPress1 = BASS_StreamCreateFile(FALSE, "./sounds/keyPress1.mp3", 0, 0, 0);
-    keyPress2 = BASS_StreamCreateFile(FALSE, "./sounds/keyPress2.mp3", 0, 0, 0);
-    keyPress3 = BASS_StreamCreateFile(FALSE, "./sounds/keyPress3.mp3", 0, 0, 0);
-    keyPress4 = BASS_StreamCreateFile(FALSE, "./sounds/keyPress4.mp3", 0, 0, 0);
+    keyCaps = BASS_StreamCreateFile(FALSE, "./sounds/default/keyCaps.mp3", 0, 0, 0);
+    keyConfirm = BASS_StreamCreateFile(FALSE, "./sounds/default/keyConfirm.mp3", 0, 0, 0);
+    keyDelete = BASS_StreamCreateFile(FALSE, "./sounds/default/keyDelete.mp3", 0, 0, 0);
+    keyMovement = BASS_StreamCreateFile(FALSE, "./sounds/default/keyMovement.mp3", 0, 0, 0);
+    keyPress1 = BASS_StreamCreateFile(FALSE, "./sounds/default/keyPress1.mp3", 0, 0, 0);
+    keyPress2 = BASS_StreamCreateFile(FALSE, "./sounds/default/keyPress2.mp3", 0, 0, 0);
+    keyPress4 = BASS_StreamCreateFile(FALSE, "./sounds/default/keyPress4.mp3", 0, 0, 0);
+    keyPress3 = BASS_StreamCreateFile(FALSE, "./sounds/default/keyPress3.mp3", 0, 0, 0);
     BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 5000);
 
 #ifdef OS_Windows
