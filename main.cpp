@@ -2,8 +2,8 @@
 #include <config.h>
 #endif
 #ifdef __unix__         
-...
-#elif defined(_WIN32) || defined(WIN32) 
+
+#elif defined(_WIN32) || defined(WIN32)
 #define OS_Windows
 #endif
 

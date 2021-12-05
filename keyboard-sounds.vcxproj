@@ -147,6 +147,8 @@
       <Optimization>MinSpace</Optimization>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <OmitFramePointers>true</OmitFramePointers>
+      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
@@ -170,23 +172,23 @@
     <CopyFileToFolders Include="bass.dll">
       <FileType>Document</FileType>
     </CopyFileToFolders>
-    <None Include="dependencies\lib\BASS\bass.dll"/>
-    <None Include="resource.aps"/>
+    <None Include="dependencies\lib\BASS\bass.dll" />
+    <None Include="resource.aps" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="dependencies\inludes\BASS\bass.h"/>
-    <ClInclude Include="resource.h"/>
+    <ClInclude Include="dependencies\inludes\BASS\bass.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
     <ItemGroup>
-      <Library Include="dependencies\lib\BASS\bass.lib"/>
+      <Library Include="dependencies\lib\BASS\bass.lib" />
     </ItemGroup>
     <ItemGroup>
         <Content Include="config.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
-      <Content Include="keycodes.h"/>
+      <Content Include="keycodes.h" />
     </ItemGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
     <ImportGroup Label="ExtensionTargets">
     </ImportGroup>
 </Project>
