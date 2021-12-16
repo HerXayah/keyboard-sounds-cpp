@@ -1,4 +1,4 @@
-# ⌨ Keyboard Sounds but better
+# ⌨ Custom Keyboard Sounds
 - This App plays keyboard sound effects, when you press keyboard keys 😳
 - The Goal is to not be like Mechvibes. Why the fuck would you want 250MB memory usage for this?.
 - We try to be lightweight and non intrusive with Sounds.
