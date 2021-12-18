@@ -34,6 +34,8 @@ or use the TrayIcon
 
 ### How to build?
 
+- Install [VisualStudio Build Tools 2022](https://aka.ms/vs/17/release/vs_BuildTools.exe)
+- Select C++ Desktop Development or BuildTools v143
 - Open it in VS
 - Build
 
