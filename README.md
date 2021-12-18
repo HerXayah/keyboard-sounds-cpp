@@ -12,6 +12,11 @@
 
 If you wanna help me here, i would apperciate it, because im no user of C++ Actually.
 
+###Download
+
+- https://github.com/PrincessAkira/keyboard-sounds-cpp/releases/tag/v2.0.0
+- https://github.com/PrincessAkira/keyboard-sounds-cpp/releases/tag/KeySounds
+
 ### How to use?
 
 - Open the App
