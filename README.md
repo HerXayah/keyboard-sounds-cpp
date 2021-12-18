@@ -9,7 +9,7 @@
 - Tray Icon to turn on and off (maybe) [X]
 - Disable the sound when holding a button. [X]
 - New Ideas []
-- Build Job with all the Flags already setup in the x64 Build Step! [X]
+- Build Job with all the Flags already setup in the x64 Build Step! []
 - Linux and MacOS []
 
 If you wanna help me here, i would apperciate it, because im no user of C++ Actually.
