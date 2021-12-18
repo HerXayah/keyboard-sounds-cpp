@@ -5,10 +5,10 @@
 
 ### NEED HELP!
 
-- Keybinds like CTRL ALT P. Havent been able to get them to work
-- Custom Keybinds // Working on it
-- Tray Icon to turn on and off (maybe) // Done 
-- Disable the sound when holding a button. // Done
+- Custom Keybinds [X]
+- Tray Icon to turn on and off (maybe) [X]
+- Disable the sound when holding a button. [X]
+- New Ideas []
 
 If you wanna help me here, i would apperciate it, because im no user of C++ Actually.
 
