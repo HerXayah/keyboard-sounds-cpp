@@ -16,7 +16,7 @@ If you wanna help me here, i would apperciate it, because im no user of C++ Actu
 
 ### Download
 
-- https://github.com/PrincessAkira/keyboard-sounds-cpp/releases/tag/v2.0.0
+- https://github.com/PrincessAkira/keyboard-sounds-cpp/releases/latest
 - https://github.com/PrincessAkira/keyboard-sounds-cpp/releases/tag/KeySounds
 
 ### How to use?
