@@ -92,7 +92,6 @@ void toggle(uiohook_event* const event) {
 }
 
 int main() {
-    
     if (std::filesystem::exists("config.json")) {
         std::ifstream in("config.json");
         config << in;
@@ -135,6 +134,8 @@ int main() {
     Tray::Tray tray("Keyboard Sounds", AppIcon);
     trayy = &tray;
     tray.addEntry(Tray::Submenu("Volume"))->addEntries(
+        Tray::Button("5%", [&] {BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 500); }),
+        Tray::Button("10%", [&] {BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 1000); }),
         Tray::Button("25%", [&] {BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 2500); }),
         Tray::Button("50%", [&] {BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 5000); }),
         Tray::Button("75%", [&] {BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 7500); }),
