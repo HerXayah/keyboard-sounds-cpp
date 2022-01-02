@@ -19,10 +19,11 @@
 #include <cstdlib>
 #include <BASS/bass.h>
 #include <nlohmann/json.hpp>
-#include <filesystem>
+#include <experimental/filesystem>
 #include <iostream>
 #include <fstream>
 #include "keycodes.h"
+
 
 using json = nlohmann::json;
 json config;
@@ -92,19 +93,25 @@ void toggle(uiohook_event* const event) {
 }
 
 int main() {
-    if (std::filesystem::exists("config.json")) {
+
+       if (!std::filesystem::exists("config.json")) {
+        std::string path = std::experimental::filesystem::current_path();   
+        std::cerr << "config.json doesn't exist. Downlading it now!";
+               
+        // Can we fucking download a File from Github please. Literally. This is so retarded
+        HRESULT file = URLDownloadToFile(NULL, "https://raw.githubusercontent.com/PrincessAkira/keyboard-sounds-cpp/main/config.json", path + "/config.json", 0, NULL);
+        if(SUCCEEDED(file) {
+         std::cout("Download successful");
+        }
+        else {
+        std::cout("error downloading")
+        } 
+       }
+           
         std::ifstream in("config.json");
         config << in;
         std::cout << "Mute/Unmute toogle key is " << config["toogle"].get<std::string>();
         muteKey = keycodes[config["toogle"].get<std::string>()];
-    }
-    else {
-        std::cerr << "config.json doesn't exist.";
-        
-           // Can we fucking download a File from Github please. Literally. This is so retarded
-        
-    //    URLDownloadToFile(NULL, _T("https://raw.githubusercontent.com/PrincessAkira/keyboard-sounds-cpp/main/config.json", _T("./config.json", 0, NULL);
-        return;
     }
 
     BASS_Init(-1, 44100, 0, 0, NULL);
