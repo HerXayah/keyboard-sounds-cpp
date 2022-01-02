@@ -123,12 +123,10 @@ int main() {
     }
     else {
         std::cerr << "config.json doesn't exist.";
-        
-           // Can we fucking download a File from Github please. Literally. This is so retarded
-        
-    //    URLDownloadToFile(NULL, _T("https://raw.githubusercontent.com/PrincessAkira/keyboard-sounds-cpp/main/config.json", _T("./config.json", 0, NULL);
-    
-    
+ 
+       //  HRESULT file = URLDownloadToFile(NULL, "https://raw.githubusercontent.com/PrincessAkira/keyboard-sounds-cpp/main/config.json", path, 0, NULL);
+           
+           
     }
 
     BASS_Init(-1, 44100, 0, 0, NULL);
