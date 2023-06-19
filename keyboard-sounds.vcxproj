@@ -172,16 +172,40 @@
     <CopyFileToFolders Include="bass.dll">
       <FileType>Document</FileType>
     </CopyFileToFolders>
+    <None Include=".gitignore" />
+    <None Include="config.json" />
     <None Include="dependencies\lib\BASS\bass.dll" />
+    <None Include="dependencies\lib\libuiohooks\Debug\uiohook.pdb" />
+    <None Include="LICENSE" />
+    <None Include="README.md" />
     <None Include="resource.aps" />
     <None Include="te\libuiohook\dist\bin\uiohook.dll" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dependencies\inludes\BASS\bass.h" />
+    <ClInclude Include="dependencies\inludes\nlohmann\json.hpp" />
+    <ClInclude Include="dependencies\inludes\traypp\components\button.hpp" />
+    <ClInclude Include="dependencies\inludes\traypp\components\imagebutton.hpp" />
+    <ClInclude Include="dependencies\inludes\traypp\components\label.hpp" />
+    <ClInclude Include="dependencies\inludes\traypp\components\separator.hpp" />
+    <ClInclude Include="dependencies\inludes\traypp\components\submenu.hpp" />
+    <ClInclude Include="dependencies\inludes\traypp\components\syncedtoggle.hpp" />
+    <ClInclude Include="dependencies\inludes\traypp\components\toggle.hpp" />
+    <ClInclude Include="dependencies\inludes\traypp\core\entry.hpp" />
+    <ClInclude Include="dependencies\inludes\traypp\core\icon.hpp" />
+    <ClInclude Include="dependencies\inludes\traypp\core\image.hpp" />
+    <ClInclude Include="dependencies\inludes\traypp\core\linux\tray.hpp" />
+    <ClInclude Include="dependencies\inludes\traypp\core\traybase.hpp" />
+    <ClInclude Include="dependencies\inludes\traypp\core\windows\tray.hpp" />
+    <ClInclude Include="dependencies\inludes\traypp\tray.hpp" />
+    <ClInclude Include="dependencies\inludes\uiohook\uiohook.h" />
+    <ClInclude Include="keycodes.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="dependencies\lib\BASS\bass.lib" />
+    <Library Include="dependencies\lib\libuiohooks\Debug\uiohook.lib" />
+    <Library Include="dependencies\lib\libuiohooks\Release\uiohook.lib" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="config.json">

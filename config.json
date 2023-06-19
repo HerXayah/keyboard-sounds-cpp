@@ -1,32 +1,18 @@
 ﻿{
-  "name": "osu",
+  "profiles": [
+    "default",
+    "Lazer"
+  ],
+  "selectedProfile": "default",
   "sounds": {
-    "keyCaps": "sounds/keyCaps.mp3",
-    "keyConfirm": "sounds/keyConfirm.mp3",
-    "keyDelete": "sounds/keyDelete.mp3",
-    "keyMovement": "sounds/keyMovement.mp3",
-    "keyPress1": "sounds/keyPress1.mp3",
-    "keyPress2": "sounds/keyPress2.mp3",
-    "keyPress3": "sounds/keyPress3.mp3",
-    "keyPress4": "sounds/keyPress4.mp3"
+    "keyCaps": "keyCaps.mp3",
+    "keyConfirm": "keyConfirm.mp3",
+    "keyDelete": "keyDelete.mp3",
+    "keyMovement": "keyMovement.mp3",
+    "keyPress1": "keyPress1.mp3",
+    "keyPress2": "keyPress2.mp3",
+    "keyPress3": "keyPress3.mp3",
+    "keyPress4": "keyPress4.mp3"
   },
-  "toogle": "VC_F7",
-  "keys": {
-    "F7": "keyConfirm",
-    "CAPS": {
-      "type": "counter",
-      "sounds": [
-        "keyCaps",
-        "keyConfirm"
-      ]
-    },
-    "default": {
-      "type": "random",
-      "sounds": [
-        "keyPress1",
-        "keyPress2",
-        "keyPress3",
-        "keyPress4"
-      ]
-    }
-}}
+  "toggle": "VC_F7"
+}
