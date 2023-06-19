@@ -3,7 +3,7 @@
     "default",
     "Lazer"
   ],
-  "selectedProfile": "default",
+  "selectedProfile": "Lazer",
   "sounds": {
     "keyCaps": "keyCaps.mp3",
     "keyConfirm": "keyConfirm.mp3",
