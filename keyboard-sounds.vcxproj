@@ -174,21 +174,22 @@
     </CopyFileToFolders>
     <None Include="dependencies\lib\BASS\bass.dll" />
     <None Include="resource.aps" />
+    <None Include="te\libuiohook\dist\bin\uiohook.dll" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dependencies\inludes\BASS\bass.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
-    <ItemGroup>
-      <Library Include="dependencies\lib\BASS\bass.lib" />
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="config.json">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
-      <Content Include="keycodes.h" />
-    </ItemGroup>
+  <ItemGroup>
+    <Library Include="dependencies\lib\BASS\bass.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="keycodes.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-    <ImportGroup Label="ExtensionTargets">
-    </ImportGroup>
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
 </Project>

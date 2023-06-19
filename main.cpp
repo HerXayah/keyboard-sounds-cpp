@@ -7,13 +7,9 @@
 #define OS_Windows
 #endif
 
-#include <inttypes.h>
 #include <stdarg.h>
 #include <stdbool.h>
-#include <stdio.h>
-#include <string.h>
 #include <uiohook/uiohook.h>
-#include <wchar.h>
 #include <traypp/tray.hpp>
 #include <csignal>
 #include <cstdlib>
@@ -24,23 +20,96 @@
 #include <fstream>
 #include "keycodes.h"
 
-
 using json = nlohmann::json;
 json config;
 
-HSTREAM keyCaps;
-HSTREAM keyConfirm;
-HSTREAM keyDelete;
-HSTREAM keyMovement;
-HSTREAM keyPress1;
-HSTREAM keyPress2;
-HSTREAM keyPress3;
-HSTREAM keyPress4;
+HSTREAM keys[8];
+
 HANDLE mutex;
 
 Tray::Tray* trayy;
 bool soundState = true;
 uint16_t muteKey = VC_F7;
+
+// English, German
+bool languageSwitch[2] = { true, false };
+
+std::locale* currentLocale = &en;
+
+void createConfigFile() {
+    json newConfig;
+    newConfig["sounds"] = {
+        {"keyCaps", "keyCaps.mp3"},
+        {"keyConfirm", "keyConfirm.mp3"},
+        {"keyDelete", "keyDelete.mp3"},
+        {"keyMovement", "keyMovement.mp3"},
+        {"keyPress1", "keyPress1.mp3"},
+        {"keyPress2", "keyPress2.mp3"},
+        {"keyPress3", "keyPress3.mp3"},
+        {"keyPress4", "keyPress4.mp3"}
+    };
+    newConfig["locale"] = 0;
+    newConfig["profiles"] = {
+        "default", "Lazer"
+    };
+    newConfig["selectedProfile"] = "default";
+    newConfig["toggle"] = "VC_F7";
+    std::ofstream file("config.json");
+    file << std::setw(2) << newConfig << std::endl;
+    file.close();
+    config = newConfig;
+}
+
+void writeConfig() {
+    std::ofstream file("config.json");
+    file << std::setw(2) << config << std::endl;
+    file.close();
+}
+
+void setLocale(int targetLanguage) {
+    config["locale"] = targetLanguage;
+    std::fill(std::begin(languageSwitch), std::end(languageSwitch), false);
+    languageSwitch[targetLanguage] = true;
+    locale* oldLocale = currentLocale;
+    switch (targetLanguage) {
+    case 0:
+        currentLocale = &en;
+        break;
+    case 1:
+        currentLocale = &de;
+        break;
+    }
+    if (trayy) {
+        std::vector<std::shared_ptr<Tray::TrayEntry>> trayEntryList = trayy->getEntries();
+        for (int i = 0; i < trayEntryList.size(); i++) {
+            if (trayEntryList[i]->getText() == oldLocale->title) {
+                trayEntryList[i]->setText(currentLocale->title);
+                continue;
+            }
+            if (trayEntryList[i]->getText() == oldLocale->language) {
+                trayEntryList[i]->setText(currentLocale->language);
+                continue;
+            }
+            if (trayEntryList[i]->getText() == oldLocale->volume) {
+                trayEntryList[i]->setText(currentLocale->volume);
+                continue;
+            }
+            if (trayEntryList[i]->getText() == oldLocale->sound) {
+                trayEntryList[i]->setText(currentLocale->sound);
+                continue;
+            }
+            if (trayEntryList[i]->getText() == oldLocale->exit) {
+                trayEntryList[i]->setText(currentLocale->exit);
+                continue;
+            }
+            if (trayEntryList[i]->getText() == oldLocale->credits) {
+                trayEntryList[i]->setText(currentLocale->credits);
+                continue;
+            }
+        }
+    }
+    writeConfig();
+}
 
 bool toogleMuteUnmute() {
     soundState = !soundState;
@@ -70,21 +139,7 @@ void toggle(uiohook_event* const event) {
             toogleMuteUnmute();
         }
         else {
-            switch (rand() % 4)
-            {
-            case 0:
-                playAudio(keyPress1);
-                break;
-            case 1:
-                playAudio(keyPress2);
-                break;
-            case 2:
-                playAudio(keyPress3);
-                break;
-            case 3:
-                playAudio(keyPress4);
-                break;
-            };
+            playAudio(keys[4 + (rand() % 4)]);
         }
     }
     else if (event->type == ::_event_type::EVENT_KEY_RELEASED) {
@@ -92,52 +147,25 @@ void toggle(uiohook_event* const event) {
     }
 }
 
-/*
-       if (std::filesystem::exists("config.json")) {
-        std::string path = std::filesystem::current_path();   
-        std::cerr << "config.json doesn't exist. Downlading it now!";
-               
-        // Can we fucking download a File from Github please. Literally. This is so retarded
-        HRESULT file = URLDownloadToFile(NULL, "https://raw.githubusercontent.com/PrincessAkira/keyboard-sounds-cpp/main/config.json", path + "/config.json", 0, NULL);
-        if(SUCCEEDED(file) {
-         std::cout("Download successful");
-        }
-        else {
-        std::cout("error downloading")
-        } 
-       }
-           
-        std::ifstream in("config.json");
-        config << in;
-        std::cout << "Mute/Unmute toogle key is " << config["toogle"].get<std::string>();
-        muteKey = keycodes[config["toogle"].get<std::string>()];
-        
-        */
-
 int main() {
-    if (std::filesystem::exists("config.json")) {
-        std::ifstream in("config.json");
-        config << in;
-        std::cout << "Mute/Unmute toogle key is " << config["toogle"].get<std::string>();
-        muteKey = keycodes[config["toogle"].get<std::string>()];
+
+    if (!std::filesystem::exists("config.json")) {
+        std::cerr << currentLocale->config_error;
+        createConfigFile();
     }
-    else {
-        std::cerr << "config.json doesn't exist.";
- 
-       //  HRESULT file = URLDownloadToFile(NULL, "https://raw.githubusercontent.com/PrincessAkira/keyboard-sounds-cpp/main/config.json", path, 0, NULL);
-           
-           
-    }
+    std::ifstream in("config.json");
+    config << in;
+    in.close();
+    std::cout << currentLocale->mute_info << config["toggle"];
+    muteKey = keycodes[config["toggle"]];
+
+    setLocale(config["locale"]);
 
     BASS_Init(-1, 44100, 0, 0, NULL);
-    keyCaps = BASS_StreamCreateFile(FALSE, "./sounds/keyCaps.mp3", 0, 0, 0);
-    keyConfirm = BASS_StreamCreateFile(FALSE, "./sounds/keyConfirm.mp3", 0, 0, 0);
-    keyDelete = BASS_StreamCreateFile(FALSE, "./sounds/keyDelete.mp3", 0, 0, 0);
-    keyMovement = BASS_StreamCreateFile(FALSE, "./sounds/keyMovement.mp3", 0, 0, 0);
-    keyPress1 = BASS_StreamCreateFile(FALSE, "./sounds/keyPress1.mp3", 0, 0, 0);
-    keyPress2 = BASS_StreamCreateFile(FALSE, "./sounds/keyPress2.mp3", 0, 0, 0);
-    keyPress4 = BASS_StreamCreateFile(FALSE, "./sounds/keyPress4.mp3", 0, 0, 0);
-    keyPress3 = BASS_StreamCreateFile(FALSE, "./sounds/keyPress3.mp3", 0, 0, 0);
+    std::string keyNames[8] = { "keyCaps", "keyConfirm", "keyDelete", "keyMovement", "keyPress1", "keyPress2", "keyPress3", "keyPress4" };
+    for (int i = 0; i < 8; i++) {
+        keys[i] = BASS_StreamCreateFile(FALSE, std::string("./sounds/").append(config["selectedProfile"]).append("/").append(config["sounds"][keyNames[i]]).c_str(), 0, 0, 0);
+    }
     BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 5000);
 
 #ifdef OS_Windows
@@ -150,7 +178,7 @@ int main() {
     if (GetLastError() == ERROR_ALREADY_EXISTS)
     {
         ShowWindow(GetConsoleWindow(), SW_SHOW);
-        printf("Application already open. Look into your Taskbar.\n");
+        std::cout << currentLocale->duplicate_error << std::endl;
         Sleep(1000);
         exit(0);
     }
@@ -158,21 +186,23 @@ int main() {
     HINSTANCE hInst = GetModuleHandle(NULL);
     HICON AppIcon = LoadIcon(hInst, MAKEINTRESOURCE(101));
 
-    Tray::Tray tray("Keyboard Sounds", AppIcon);
+    Tray::Tray tray(currentLocale->title, AppIcon);
     trayy = &tray;
-    tray.addEntry(Tray::Submenu("Volume"))->addEntries(
-        Tray::Button("5%", [&] {BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 500); }),
-        Tray::Button("10%", [&] {BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 1000); }),
+    tray.addEntry(Tray::Submenu(currentLocale->language))->addEntries(
+        Tray::SyncedToggle("English", languageSwitch[0], [](bool) { setLocale(0); }),
+        Tray::SyncedToggle("German", languageSwitch[1], [](bool) { setLocale(1); })
+    );
+    tray.addEntry(Tray::Submenu(currentLocale->volume))->addEntries(
         Tray::Button("25%", [&] {BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 2500); }),
         Tray::Button("50%", [&] {BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 5000); }),
         Tray::Button("75%", [&] {BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 7500); }),
         Tray::Button("100%", [&] {BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, 10000); })
     );
     tray.addEntry(Tray::Separator());
-    tray.addEntry(Tray::SyncedToggle("Sound", soundState));
+    tray.addEntry(Tray::SyncedToggle(currentLocale->sound, soundState));
     tray.addEntry(Tray::Separator());
-    tray.addEntry(Tray::Button("Exit", [&] { tray.exit(); hook_stop(); exit(0); CloseHandle(mutex); }));
-    tray.addEntry(Tray::Label("made by nice ppl"));
+    tray.addEntry(Tray::Button(currentLocale->exit, [&] { writeConfig(); tray.exit(); hook_stop(); exit(0); CloseHandle(mutex); }));
+    tray.addEntry(Tray::Label(currentLocale->credits));
 
     hook_set_dispatch_proc(&toggle);
     hook_run(); // Starting State On

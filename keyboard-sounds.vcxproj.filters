@@ -29,6 +29,7 @@
       <Filter>Source Files</Filter>
     </None>
     <None Include="dependencies\lib\BASS\bass.dll" />
+    <None Include="te\libuiohook\dist\bin\uiohook.dll" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
