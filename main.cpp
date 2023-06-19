@@ -7,9 +7,13 @@
 #define OS_Windows
 #endif
 
+#include <inttypes.h>
 #include <stdarg.h>
 #include <stdbool.h>
+#include <stdio.h>
+#include <string.h>
 #include <uiohook/uiohook.h>
+#include <wchar.h>
 #include <traypp/tray.hpp>
 #include <csignal>
 #include <cstdlib>
@@ -18,7 +22,9 @@
 #include <filesystem>
 #include <iostream>
 #include <fstream>
+#include "windows.h"
 #include "keycodes.h"
+
 using namespace std;
 
 using json = nlohmann::json;
