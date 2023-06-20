@@ -166,6 +166,10 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <CompileAs>CompileAsCpp</CompileAs>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <ErrorReporting>None</ErrorReporting>
+      <CallingConvention>FastCall</CallingConvention>
+      <CreateHotpatchableImage>false</CreateHotpatchableImage>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
@@ -173,7 +177,12 @@
       <AdditionalLibraryDirectories>$(ProjectDir)dependencies\lib\traypp\Release;$(ProjectDir)dependencies\lib\libuiohooks\Release;$(ProjectDir)dependencies\lib\BASS\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>tray.lib;uiohook.lib;bass.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <OptimizeReferences>true</OptimizeReferences>
+      <IgnoreEmbeddedIDL>true</IgnoreEmbeddedIDL>
+      <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <TurnOffAssemblyGeneration>false</TurnOffAssemblyGeneration>
     </Link>
     <Manifest>
       <VerboseOutput>false</VerboseOutput>
